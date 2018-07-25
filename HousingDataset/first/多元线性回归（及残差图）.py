@@ -47,8 +47,8 @@ plt.hlines(y=0,xmin=-10,xmax=50,lw=2,color='red')
 plt.xlim([-10,50])
 plt.show()
 
-print("训练集残差",mean_squared_error(y_train,y_train_pred))
-print('测试集残差',mean_squared_error(y_test,y_test_pred))
+print("训练集均方误差",mean_squared_error(y_train,y_train_pred))
+print('测试集均方误差',mean_squared_error(y_test,y_test_pred))
 
 print("训练集决定系数",r2_score(y_train,y_train_pred))
 print("测试集决定系数",r2_score(y_test,y_test_pred))
