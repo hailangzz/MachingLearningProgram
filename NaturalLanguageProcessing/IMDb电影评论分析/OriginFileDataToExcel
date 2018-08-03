@@ -1,0 +1,33 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Tue Jul 31 14:38:32 2018
+
+@author: Administrator
+"""
+import pyprind
+import pandas as pd
+import os
+
+
+#读取评论文件数据······
+pbar = pyprind.ProgBar(50000)
+labels={'pos':1,'neg':0}
+
+df=pd.DataFrame()
+for s in ('test','train'):
+    for l in ('pos','neg'):
+        path = 'E:/GitLocalRepository/aclImdb/%s/%s' % (s,l)
+        for file in os.listdir(path):
+            with open(os.path.join(path,file),'r',encoding='utf-8') as infile:
+                txt=infile.read()
+            df = df.append([[txt,labels[l]]],ignore_index=True)
+            pbar.update()
+df.columns=['review','sentiment']
+
+#将读取的评论文件数据保存为excel文件···
+import numpy as np
+np.random.seed(0)
+df = df.reindex(np.random.permutation(df.index))
+df.to_csv('E:/GitLocalRepository/movie_data.csv',index=False)
+
+#
